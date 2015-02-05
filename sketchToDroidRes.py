@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 from os import listdir
-from os.path import isfile, join, isdir, abspath
+from os.path import isfile, join, isdir, abspath, isabs
 
 DEBUG = True
 
@@ -308,6 +308,8 @@ def main(argv):
     args = get_arg_parser().parse_args()
 
     config_path = get_config_path(args.config)
+    if not isabs(config_path):
+        config_path = join(os.getcwd(), config_path)
 
     inputDir = None
     outputDir = None
@@ -316,13 +318,18 @@ def main(argv):
 
     # Load configuration from file
     if config_path is not None:
+        config_head, config_tail = os.path.split(config_path)
         try:
             config = ConfigParser.ConfigParser()
             config.readfp(open(config_path))
             inputDir = get_from_config_default(
                 config, 'Config', 'input', inputDir)
+            if not isabs(inputDir):
+                inputDir = join(config_head, inputDir)
             outputDir = get_from_config_default(
                 config, 'Config', 'output', outputDir)
+            if not isabs(outputDir):
+                outputDir = join(config_head, outputDir)
             inputRes = get_from_config_default(
                 config, 'Config', 'inputResolution', inputRes)
             outputRes = get_from_config_default(
