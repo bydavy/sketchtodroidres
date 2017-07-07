@@ -1,14 +1,14 @@
-#SketchToDroidRes
+# SketchToDroidRes
 
 This tool generate Android ressources as .png out of artboards in Sketch (http://bohemiancoding.com/sketch/).
 This is an opinionated vision of ressources generation and might not fit to everyone's workflow.
 
-##Creation of .sketch files
+## Creation of .sketch files
 One artboard is one asset. Artboards need to be named carefully as assets will have the artboard's name.
 The .sketch file can contain as many pages as you want
 
 
-##Using the tool
+## Using the tool
 ```bash
 ./SketchToDroidRes -i /xxx/mySketches -o /xxx/src/main/res -r mdpi -r xxxhdpi
 ```
@@ -41,18 +41,18 @@ optional arguments:
   --version             show program's version number and exit
 ```
 
-##Running the example
+## Running the example
 ```bash
 git clone https://github.com/bydavy/sketchtodroidres.git
 cd example
 ../sketchToDroidRes.py
 ```
 
-##Configuration file
+## Configuration file
 
 You can skip arguments when using the tool if you have a SketchToDroidRes.config file in your working directory;
 
-###Example of SketchToDroidRes.config
+### Example of SketchToDroidRes.config
 ```
 [Config]
 input=/xxx/mySketches
